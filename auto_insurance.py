@@ -1,4 +1,5 @@
 import pandas as pd
+from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 from sklearn.svm import SVR
 from sklearn.neural_network import MLPRegressor
 from sklearn.model_selection import train_test_split
@@ -33,6 +34,38 @@ kn.fit(X_train, y_train)
 # MLP
 mlp = MLPRegressor((100, 100), random_state=1, max_iter=500)
 mlp.fit(X_train, y_train)
+
+# Metrics
+svr_prediction = svr.predict(X_test)
+kn_prediction = kn.predict(X_test)
+mlp_prediction = mlp.predict(X_test)
+
+# R2
+svr_r2 = r2_score(y_test, svr_prediction)
+kn_r2 = r2_score(y_test, kn_prediction)
+mlp_r2 = r2_score(y_test, mlp_prediction)
+print("R2 SVR ", svr_r2)
+print("R2 K-Vecinos ", kn_r2)
+print("R2 Perceptrón ", mlp_r2)
+print("")
+
+# MSE
+svr_mse = mean_squared_error(y_test, svr_prediction)
+kn_mse = mean_squared_error(y_test, kn_prediction)
+mlp_mse = mean_squared_error(y_test, mlp_prediction)
+print("Error Medio SVR ", svr_mse)
+print("Error Medio K-Vecinos ", kn_mse)
+print("Error Medio Perceptrón ", mlp_mse)
+print("")
+
+# MAE
+svr_mae = mean_absolute_error(y_test, svr_prediction)
+kn_mae = mean_absolute_error(y_test, kn_prediction)
+mlp_mae = mean_absolute_error(y_test, mlp_prediction)
+print("Error Absoluto SVR ", svr_mae)
+print("Error Absoluto K-Vecinos ", kn_mae)
+print("Error Absoluto Perceptrón ", mlp_mae)
+print("")
 
 # Plot data and predictions curves
 plt.figure(figsize=(9, 9))

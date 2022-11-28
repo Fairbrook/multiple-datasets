@@ -12,12 +12,12 @@ import matplotlib.pyplot as plt
 from matplotlib.gridspec import GridSpec
 
 # Get the dataset
-url = 'https://gist.githubusercontent.com/Fairbrook/359ed08d011bc0279091313f52b53bbb/raw/22aa9239a75ba113190458b5cc12c1e6ac8f1a02/White%2520Wine%2520Quality%2520dataset'
-df = pd.read_csv(url, sep=';', header='infer',  engine='python')
+url = 'https://raw.githubusercontent.com/sharmaroshan/Zoo-Dataset/master/zoo.csv'
+df = pd.read_csv(url, sep=',', header='infer',  engine='python')
 
 # Separate data from labels
-X = df.drop(columns="quality", axis=1).to_numpy()
-y = df.quality.to_numpy()
+X = df.drop(columns=["class_type", "animal_name"], axis=1).to_numpy()
+y = df["class_type"].to_numpy()
 
 # Separate training from test data
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.4)
